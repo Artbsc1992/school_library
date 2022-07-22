@@ -58,16 +58,17 @@ class App
   end
 
   def action_list_books
+    p 'Book successfully created!'
     list_books
-    p '\n\n Press enter to continue...'
+    p 'Press enter to continue...'
     gets.chomp
     run
   end
 
   def action_list_people
     list_people
-    p '\n\n Press enter to continue...'
-    gets.chomp
+    p 'Press enter to continue...!'
+    gets
     run
   end
 
@@ -111,7 +112,7 @@ class App
     when '2'
       create_teacher
     end
-    puts "Person created successfully!\n\n"
+    puts "Person created successfully!"
     gets
     run
   end
@@ -127,10 +128,10 @@ class App
   end
 
   def create_rental
-    puts '\n Select a book from the following list by number'
+    puts 'Select a book from the following list by number'
     list_books
     book_index = gets.chomp
-    puts '\n Select a person from the following list by number'
+    puts 'Select a person from the following list by number'
     list_people
     person_index = gets.chomp
     print '\n Date(yyyy/mm/dd): '
@@ -145,11 +146,16 @@ class App
     me = nil
     print '\nID of person: '
     person_id = gets.chomp
+    @people.each_with_index.map do |person, i|
+      puts "#{i}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, age: #{person.age}"
+    end
+    print 'Please, write the ID of the person: '
+    person_id = gets.chomp
     @people.each do |x|
       me = x if x.id == person_id.to_i
     end
-    me.rentals.each do |x|
-      puts x.date
+    me.rentals.each do |rental|
+      puts "Date: #{rental.date}, Book: #{rental.book.title} by Author: #{rental.book.author} "
     end
     puts
     run
