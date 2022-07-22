@@ -19,7 +19,7 @@ class App
     p '4 - Create a book'
     p '5 - Create a rental'
     p '6 - List all rentals for a given person id'
-    p "7 - Exit\n\n"
+    p "7 - Exit"
     action(gets.chomp)
   end
 
@@ -38,9 +38,11 @@ class App
       create_rental
     when '6'
       list_rental
-    else
+    when '7'
       p 'Thanks for using this App!'
       exit
+    else
+      p 'Wrong command pleas try again.'
     end
   end
 
@@ -48,5 +50,18 @@ class App
     @my_books.each_with_index do |x, index|
       puts "#{index}) Title: \"#{x.title}\", Author: #{x.author}"
     end
+  end
+
+  def list_people
+    @people.each_with_index do |x, index|
+      puts "#{index}) [#{x.class.name}] Name: #{x.name}, ID: #{x.id}, Age: #{x.age}"
+    end
+  end
+
+  def action_list_books
+    list_book
+    p '\n\n Press enter to continue...'
+    gets.chomp
+    run
   end
 end
