@@ -112,7 +112,7 @@ class App
     when '2'
       create_teacher
     end
-    puts "Person created successfully!"
+    puts 'Person created successfully!'
     gets
     run
   end
@@ -157,7 +157,8 @@ class App
     me.rentals.each do |rental|
       puts "Date: #{rental.date}, Book: #{rental.book.title} by Author: #{rental.book.author} "
     end
-    puts
+    puts 'Press any key to continue..'
     run
+    puts 'Press any key to continue..'
   end
 end
