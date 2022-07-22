@@ -2,6 +2,7 @@ require './person'
 require './book'
 require './teacher'
 require './student'
+require './rental'
 
 class App
   def initialize
@@ -20,7 +21,7 @@ class App
     p '5 - Create a rental'
     p '6 - List all rentals for a given person id'
     p '7 - Exit'
-    action(gets.chomp)
+    gets.chomp
   end
 
   def run
@@ -44,7 +45,7 @@ class App
     end
   end
 
-  def action_list_books
+  def list_books
     @my_books.each_with_index do |x, index|
       puts "#{index}) Title: \"#{x.title}\", Author: #{x.author}"
     end
@@ -57,7 +58,7 @@ class App
   end
 
   def action_list_books
-    list_book
+    list_books
     p '\n\n Press enter to continue...'
     gets.chomp
     run
@@ -72,9 +73,9 @@ class App
 
   def my_permission(my_char)
     case my_char
-    when 'n'
+    when 'N'
       false
-    when 'y'
+    when 'Y'
       true
     end
   end
