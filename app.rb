@@ -28,7 +28,7 @@ class App
     choice = show_menu
     case choice
     when '1'
-      action_list_books
+      action_list_book
     when '2'
       action_list_people
     when '3'
