@@ -42,6 +42,8 @@ class App
     when '7'
       p 'Thanks for using this App!'
       exit
+    else
+      run
     end
   end
 
@@ -128,10 +130,10 @@ class App
   end
 
   def create_rental
-    puts 'Select a book from the following list by number'
+    puts 'Select a book from the following list by index'
     list_books
     book_index = gets.chomp
-    puts 'Select a person from the following list by number'
+    puts 'Select a person from the following list by index'
     list_people
     person_index = gets.chomp
     print '\n Date(yyyy/mm/dd): '
@@ -144,8 +146,6 @@ class App
 
   def list_rental
     me = nil
-    print '\nID of person: '
-    person_id = gets.chomp
     @people.each_with_index.map do |person, i|
       puts "#{i}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, age: #{person.age}"
     end
