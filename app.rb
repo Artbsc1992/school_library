@@ -4,13 +4,10 @@ require './teacher'
 require './student'
 
 class App
-
   def initialize
-
     @my_books = []
     @my_rentals = []
     @people = []
-
   end
 
   def show_menu
@@ -29,15 +26,21 @@ class App
   def run
     choice = show_menu
     case choice
-    when '1' then action_list_books
-    when '2' then action_list_people
-    when '3' then create_person
-    when '4' then create_book
-    when '5' then create_rental
-    when '6' then list_rental
-    when '7' then p 'Thanks for using this App!' exit
+    when '1'
+      action_list_books
+    when '2'
+      action_list_people
+    when '3'
+      create_person
+    when '4'
+      create_book
+    when '5'
+      create_rental
+    when '6'
+      list_rental
     else
-      p 'Wrong command try again please.'
+      p 'Thanks for using this App!'
+      exit
     end
   end
 
