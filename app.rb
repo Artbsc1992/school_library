@@ -3,8 +3,10 @@ require './book'
 require './teacher'
 require './student'
 require './rental'
+require './handlers'
 
 class App
+include(Handlers)
   def initialize
     @my_books = []
     @my_rentals = []
