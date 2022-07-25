@@ -7,7 +7,7 @@ def main
 
   puts "Welcome to School Library App!\n\n"
   while response != '7'
-    p "Please choose an option by entering a number:\n"
+    p "Please choose an option by entering a number:"
     p '1 - List all books'
     p '2 - List all people'
     p '3 - Create a people'
