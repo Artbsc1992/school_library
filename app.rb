@@ -6,7 +6,7 @@ require './rental'
 require './handlers'
 
 class App
-include(Handlers)
+  include(Handlers)
   def initialize
     @my_books = []
     @my_rentals = []

@@ -1,6 +1,5 @@
 module Handlers
-
-def list_books
+  def list_books
     @my_books.each_with_index do |x, index|
       puts "#{index}) Title: \"#{x.title}\", Author: #{x.author}"
     end
@@ -114,5 +113,4 @@ def list_books
     run
     puts 'Press any key to continue..'
   end
-
 end
