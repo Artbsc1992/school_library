@@ -23,7 +23,7 @@ def main
     when '2'
       app.action_list_people
     when '3'
-      app.create_person()
+      app.create_person
     when '4'
       app.create_book
     when '5'
