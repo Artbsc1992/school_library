@@ -3,12 +3,20 @@ require './book'
 require './teacher'
 require './student'
 require './rental'
+require 'json'
 
 class App
   def initialize
-    @my_books = []
-    @my_rentals = []
-    @people = []
+    @my_books = File.exist?('./books.json') ? JSON.parse(File.read('./books.json'), create_additions: true) : []
+    @my_rentals = if File.exist?('./rentals.json')
+                    JSON.parse(File.read('./rentals.json'),
+                               { create_additions: true }).map do |rental|
+                      load_rental_details(rental)
+                    end
+                  else
+                    []
+                  end
+    @people = File.exist?('./people.json') ? JSON.parse(File.read('./people.json'), create_additions: true) : []
   end
 
   def list_books
@@ -117,5 +125,17 @@ class App
       puts "Date: #{rental.date}, Book: #{rental.book.title} by Author: #{rental.book.author} "
     end
     puts 'Press any key to continue..'
+  end
+
+  def save_data
+    File.write('books.json', JSON.generate(@my_books))
+    File.write('people.json', JSON.generate(@people))
+    File.write('rentals.json', JSON.generate(@my_rentals))
+  end
+
+  def load_rental_details(rental)
+    person = @people.filter { |per| per.id == rental[:person_id] }.first
+    book = @my_books.filter { |b| b.title == rental[:book_title] }.first
+    Rental.new(rental[:date], person, book)
   end
 end

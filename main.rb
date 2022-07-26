@@ -33,7 +33,9 @@ def main
     when '7'
       p 'Thanks for using this App!'
       exit
+
     end
+    app.save_data
   end
 end
 
