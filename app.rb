@@ -7,9 +7,9 @@ require 'json'
 
 class App
   def initialize
-    @my_books = File.exist?('./books.json') ? JSON.parse(File.read('./books.json'), create_aditions: true) : []
-    @my_rentals = File.exist?('rentals.json') ? JSON.parse(File.read('rentals.json')) : []
-    @people = File.exist?('people.json') ? JSON.parse(File.read('people.json'), create_aditions:true) : []
+    @my_books = File.exist?('./books.json') ? JSON.parse(File.read('./books.json'), create_additions: true) : []
+    @my_rentals = File.exist?('./rentals.json') ? JSON.parse(File.read('rentals.json')) : []
+    @people = File.exist?('./people.json') ? JSON.parse(File.read('people.json'), create_additions:true) : []
   end
 
   def list_books
@@ -121,8 +121,8 @@ class App
   end
 
   def save_data
-    File.write('books.json', @my_books.to_json)
-    File.write('people.json', @people.to_json)
-    File.write('rentals.json', @my_rentals.to_json)
+    File.write('books.json', JSON.generate(@my_books))
+    File.write('people.json', JSON.generate(@people))
+    File.write('rentals.json', JSON.generate(@my_rentals))
   end
 end
