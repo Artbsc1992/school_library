@@ -7,9 +7,9 @@ require 'json'
 
 class App
   def initialize
-    @my_books = File.exist?('books.json') ? JSON.parse(File.read('books.json')) : []
+    @my_books = File.exist?('./books.json') ? JSON.parse(File.read('./books.json'), create_aditions: true) : []
     @my_rentals = File.exist?('rentals.json') ? JSON.parse(File.read('rentals.json')) : []
-    @people = File.exist?('people.json') ? JSON.parse(File.read('people.json')) : []
+    @people = File.exist?('people.json') ? JSON.parse(File.read('people.json'), create_aditions:true) : []
   end
 
   def list_books
