@@ -34,6 +34,7 @@ def main
       p 'Thanks for using this App!'
       exit
     end
+    app.save_data
   end
 end
 

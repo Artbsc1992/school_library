@@ -3,12 +3,13 @@ require './book'
 require './teacher'
 require './student'
 require './rental'
+require 'json'
 
 class App
   def initialize
-    @my_books = []
-    @my_rentals = []
-    @people = []
+    @my_books = File.exist?('books.json') ? JSON.parse(File.read('books.json')) : []
+    @my_rentals = File.exist?('rentals.json') ? JSON.parse(File.read('rentals.json')) : []
+    @people = File.exist?('people.json') ? JSON.parse(File.read('people.json')) : []
   end
 
   def list_books
@@ -117,5 +118,11 @@ class App
       puts "Date: #{rental.date}, Book: #{rental.book.title} by Author: #{rental.book.author} "
     end
     puts 'Press any key to continue..'
+  end
+
+  def save_data
+    File.write('books.json', @my_books.to_json)
+    File.write('people.json', @people.to_json)
+    File.write('rentals.json', @my_rentals.to_json)
   end
 end
