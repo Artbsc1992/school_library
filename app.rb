@@ -8,8 +8,15 @@ require 'json'
 class App
   def initialize
     @my_books = File.exist?('./books.json') ? JSON.parse(File.read('./books.json'), create_additions: true) : []
-    @my_rentals = File.exist?('./rentals.json') ? JSON.parse(File.read('./rentals.json')) : []
-    @people = File.exist?('./people.json') ? JSON.parse(File.read('./people.json'), create_additions:true) : []
+    @people = File.exist?('./people.json') ? JSON.parse(File.read('./people.json'), create_additions: true) : []
+    @my_rentals = if File.exist?('./rentals.json')
+                    JSON.parse(File.read('./rentals.json'),
+                               { create_additions: true }).map do |rental|
+                      instance_rental(rental)
+                    end
+                  else
+                    []
+                  end
   end
 
   def list_books
@@ -105,16 +112,17 @@ class App
   end
 
   def list_rental
-    me = nil
     @people.each_with_index.map do |person, i|
       puts "#{i}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, age: #{person.age}"
     end
     print 'Please, write the ID of the person: '
     person_id = gets.chomp
-    @people.each do |x|
-      me = x if x.id == person_id.to_i
-    end
+    me = @people.filter do |x|
+      x.id == person_id.to_i
+    end.first
+    p me
     me.rentals.each do |rental|
+      p rental
       puts "Date: #{rental.date}, Book: #{rental.book.title} by Author: #{rental.book.author} "
     end
     puts 'Press any key to continue..'
@@ -124,5 +132,19 @@ class App
     File.write('books.json', JSON.generate(@my_books))
     File.write('people.json', JSON.generate(@people))
     File.write('rentals.json', JSON.generate(@my_rentals))
+  end
+
+  def instance_rental(rental)
+    person = @people.filter do |e|
+      e.id == rental[:person_id]
+    end
+    book = @my_books.filter do |e|
+      e.title == rental[:book_title]
+    end
+    p rental, book[0], person[0]
+    rent = Rental.new(rental[:date])
+    rent.add_book(book[0])
+    rent.add_person(person[0])
+    rent
   end
 end
