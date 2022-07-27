@@ -20,14 +20,13 @@ class Student < Person
   def to_json(*args)
     {
       JSON.create_id => self.class.name,
-      'a'=>[age, classroom, name, parent_permission, id, rentals]
-    }.to_json(*args)    
+      'a' => [age, name, parent_permission, classroom, id]
+    }.to_json(*args)
   end
 
   def self.json_create(obj)
-    person = new(obj['a'][0], obj['a'][1], obj['a'][2], parent_permission: obj['a'][3])
+    person = new(obj['a'][0], obj['a'][1], obj['a'][2], obj['a'][3])
     person.id = obj['a'][4]
-    person.rentals = obj['a'][5]
     person
   end
 end

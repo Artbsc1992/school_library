@@ -15,14 +15,11 @@ class Book
   def to_json(*args)
     {
       JSON.create_id => self.class.name,
-      'a'=>[title, author, rentals]
-    }.to_json(*args)    
+      'a' => [title, author]
+    }.to_json(*args)
   end
 
   def self.json_create(obj)
-    book = new(obj['a'][0], obj['a'][1])
-    book.rentals = obj['a'][2]
-    book
+    new(obj['a'][0], obj['a'][1])
   end
-  
 end
