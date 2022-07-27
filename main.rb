@@ -32,9 +32,10 @@ def main
       app.list_rental
     when '7'
       p 'Thanks for using this App!'
+      app.save_data
       exit
     end
-    app.save_data
+
   end
 end
 
