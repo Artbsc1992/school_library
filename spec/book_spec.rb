@@ -19,5 +19,4 @@ describe Book do
   it 'should match an author' do
     expect(@book.author).to eq 'Author'
   end
-   
 end

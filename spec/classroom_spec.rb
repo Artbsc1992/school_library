@@ -2,8 +2,8 @@ require './classrom'
 require './student'
 describe Classroom do
   before :each do
-    @classroom = Classroom.new("1A")
-    @student = Student.new(20, "Luis", true)
+    @classroom = Classroom.new('1A')
+    @student = Student.new(20, 'Luis', true)
   end
 
   describe '#new' do
@@ -12,7 +12,7 @@ describe Classroom do
     end
 
     it 'Has the correct label' do
-      expect(@classroom.label).to eq("1A")
+      expect(@classroom.label).to eq('1A')
     end
 
     it 'Has an empty array of students' do

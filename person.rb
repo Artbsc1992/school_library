@@ -25,7 +25,7 @@ class Person < Nameable
     rental.person = self
   end
 
-  #private
+  # private
 
   def of_age?
     @age >= 18
