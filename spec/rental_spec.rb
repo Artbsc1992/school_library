@@ -1,11 +1,8 @@
 require './rental'
-#require './student'
-#require './book'
+
 describe Rental do
   before :each do
     @rental = Rental.new('2016, 1, 1')
-    #@student = Student.new(20, "Luis", true)
-    #@book = Book.new("Title", "Author")
   end
 
   describe '#new' do
